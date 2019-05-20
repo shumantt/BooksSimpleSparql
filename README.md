@@ -1,6 +1,6 @@
 # book-selection
 
-Simple Web-Page for displaying books info based in DBpedia data (https://wiki.dbpedia.org/)
+Simple Web-Page for displaying books info based on DBpedia data (https://wiki.dbpedia.org/)
 
 ## Project setup
 ```
