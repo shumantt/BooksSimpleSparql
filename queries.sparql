@@ -1,0 +1,25 @@
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX db: <http://dbpedia.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT *
+  WHERE {
+  	?book a dbo:Book;
+         dbo:releaseDate ?releasDate;
+         dbo:literaryGenre ?genre;
+         dbo:author ?author.
+  	?author dbo:birthDate ?birthDate.
+  	?genre rdfs:label ?genreLbl.
+  FILTER (REGEX(STR(?birthDate),"[0-9]{4}-[0-9]{2}-[0-9]{2}")).
+  FILTER (LANG(?genreLbl) = "en").
+  BIND ((year(?releasDate) - year(?birthDate)) as ?written_age).
+ 
+  FILTER (contains(?genreLbl,"novel")).
+} ORDER BY ?written_age
+
+
